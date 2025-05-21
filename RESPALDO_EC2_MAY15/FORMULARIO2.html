@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Formulario de inspección de pallets" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Inspección de Pallets</title>
+  <link rel="icon" href="data:,">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="static/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet"/>
+
+  <!-- Librerías -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js" defer></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+
+  <!-- Protección contra accesos incorrectos o recargas -->
+  <script>
+    (function () {
+      const requiredKeys = ['selectedCustomer', 'selectedHeadOffice', 'selectedPackSizes', 'totalPallets', 'inspectorName'];
+      const missingKeys = requiredKeys.filter(key => !localStorage.getItem(key));
+      const yaTerminado = localStorage.getItem("formularioTerminado") === "true";
+
+      if (yaTerminado) {
+        localStorage.clear(); // 🧹 Limpia todo
+        window.location.href = "FORMULARIO.html"; // 🔁 Redirige sin alertas
+      } else if (missingKeys.length > 0) {
+        alert("Faltan datos esenciales. Regresando al formulario anterior...");
+        window.location.href = "FORMULARIO.html";
+      }
+    })();
+  </script>
+
+  <!-- Carga de UPCs antes de todo -->
+  <script>
+    window.upcsData = {};
+    fetch("data/upcs_structured.json")
+      .then((res) => res.json())
+      .then((data) => {
+        window.upcsData = data;
+        console.log("✅ upcs_structured.json cargado correctamente");
+      })
+      .catch((err) => {
+        console.error("❌ Error al cargar upcs_structured.json", err);
+      });
+  </script>
+
+  <style>
+    .final-status-block {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .passed {
+      color: green;
+    }
+    .failed {
+      color: red;
+    }
+
+    /* Responsive ajustes */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    .form-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #form-wizard {
+      width: 100%;
+    }
+
+    .wizard-page {
+      padding: 15px;
+    }
+
+    .final-page h2 {
+      font-size: 22px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 10px;
+      }
+
+      .final-page h2 {
+        font-size: 18px;
+      }
+
+      .final-status-block {
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div id="form-wizard">
+      <!-- Página final: formulario enviado -->
+      <div class="wizard-page final-page" style="display: none;">
+        <h2>✅ Formulario enviado correctamente</h2>
+        <div id="finalOrderStatusBlock" class="final-status-block">
+          FINAL ORDER STATUS: <span id="finalOrderStatus" class="status-field"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts del sistema (orden intacto y funcional) -->
+  <script src="static/formulario2-utils.js" defer></script>
+  <script src="static/formulario2-pallets.js" defer></script>
+  <script src="static/formulario2-wizard.js" defer></script>
+  <script src="static/formulario2-condicionales.js" defer></script>
+  <script src="static/formulario2-foto.js" defer></script>
+  <script src="static/formulario2-packsizes.js" defer></script>
+  <script src="static/formulario2-evaluacion.js" defer></script>
+  <script src="static/formulario2-db.js" defer></script>
+  <script src="static/formulario2-boton.js" defer></script>
+  
+  <script src="static/formulario2-correo.js" defer></script>
+  <script src="static/formulario2-alerta.js" defer></script>
+  <script src="static/formulario2-errores.js" defer></script>
+  <script src="static/formulario2-pdf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

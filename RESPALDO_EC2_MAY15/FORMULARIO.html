@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Check Form</title>
+  <link rel="stylesheet" href="static/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  <style>
+    /* Responsive layout adjustments */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      max-width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group div {
+      min-width: 45%;
+    }
+
+    .btn-container {
+      text-align: center;
+    }
+
+    .btn-next {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .foto-blueberries img {
+      max-width: 100%;
+      height: auto;
+      margin: 15px 0;
+      display: block;
+    }
+
+    @media (max-width: 500px) {
+      .checkbox-group div {
+        min-width: 100%;
+      }
+
+      .btn-next {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 22px;
+        text-align: center;
+      }
+
+      label {
+        font-size: 14px;
+      }
+    }
+  </style>
+  <script>
+    if (localStorage.getItem("formularioTerminado") === "true") {
+      localStorage.clear();
+      alert("Formulario reiniciado correctamente.");
+    }
+  </script>
+</head>
+<body>
+  <div class="form-container">
+    <h1>BLUEBERRIES ORDER CHECK FORM</h1>
+    <div class="foto-blueberries">
+      <img src="static/fotos/blueberries.jpg" alt="Blueberries">
+    </div>
+
+    <label for="order" class="required">ORDER NUMBER</label>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <input type="text" id="order" style="flex: 1; min-width: 200px;">
+      <button type="button" id="btn-prefill" style="padding: 6px 12px;">Prefill</button>
+    </div>
+    <div class="note">Numero de Orden</div>
+
+    <label for="location">LOADING LOCATION</label>
+    <select id="location">
+      <option>Please Select</option>
+      <option>ABIGAIL</option>
+      <option>COLDFRESH</option>
+      <option>VINELAND</option>
+    </select>
+
+    <label for="customer" class="required">CUSTOMER LIST</label>
+    <select id="customer" placeholder="Select or search customer...">
+      <option value="">Please select</option>
+    </select>
+
+    <label for="headoffice">HEAD OFFICE</label>
+    <input type="text" id="headoffice" readonly>
+
+    <label for="loaddate" class="required">LOAD DATE</label>
+    <input type="text" id="loaddate" placeholder="MM-DD-YYYY">
+
+    <label for="inspector">INSPECTOR NAME</label>
+    <select id="inspector" name="inspector">
+      <option>Please Select</option>
+      <option>ABIGAIL</option>
+      <option>PATRICIA</option>
+      <option>ANGEL</option>
+      <option>YORLANYS</option>
+      <option>TEST</option>
+    </select>
+
+    <label class="required">PACK SIZE</label>
+    <div class="checkbox-group" id="packSizeGroup">
+      <div data-pack="12 X 6OZ"><label><input type="checkbox" value="12 X 6OZ"> 12 X 6OZ</label></div>
+      <div data-pack="6 X 6OZ"><label><input type="checkbox" value="6 X 6OZ"> 6 X 6OZ</label></div>
+      <div data-pack="12 X PINT"><label><input type="checkbox" value="12 X PINT"> 12 X PINT</label></div>
+      <div data-pack="8 X 18OZ"><label><input type="checkbox" value="8 X 18OZ"> 8 X 18OZ</label></div>
+      <div data-pack="12 X 18OZ"><label><input type="checkbox" value="12 X 18OZ"> 12 X 18OZ</label></div>
+      <div data-pack="12 X 9.8OZ JUMBO"><label><input type="checkbox" value="12 X 9.8OZ JUMBO"> 12 X 9.8OZ JUMBO</label></div>
+      <div data-pack="12 X 6OZ (ORGANIC)"><label><input type="checkbox" value="12 X 6OZ (ORGANIC)"> 12 X 6OZ (ORGANIC)</label></div>
+      <div data-pack="12 X PINT (ORGANIC)"><label><input type="checkbox" value="12 X PINT (ORGANIC)"> 12 X PINT (ORGANIC)</label></div>
+      <div data-pack="8 X 18OZ (ORGANIC)"><label><input type="checkbox" value="8 X 18OZ (ORGANIC)"> 8 X 18OZ (ORGANIC)</label></div>
+      <div data-pack="12 X 18OZ (ORGANIC)"><label><input type="checkbox" value="12 X 18OZ (ORGANIC)"> 12 X 18OZ (ORGANIC)</label></div>
+    </div>
+
+    <div id="pallet-section" style="display: none;">
+      <div class="section-title">TOTAL PALLETS / CASES:</div>
+      <div id="pallet-fields"></div>
+      <label for="grand-total">TOTAL PALLETS</label>
+      <input type="text" id="grand-total" value="0" readonly>
+    </div>
+
+    <div class="btn-container">
+      <button class="btn-next" onclick="goToNext()">Next</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="static/formulario1-prefill.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script src="static/formulario1.js"></script>
+  <script>
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted || performance.navigation.type === 2) {
+        console.log("🔁 Limpiando localStorage por navegación atrás o cache.");
+        localStorage.clear();
+
+        // Limpieza visual de todos los campos
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = false;
+          } else if (el.tagName === 'SELECT') {
+            el.selectedIndex = 0;
+            el.value = "";
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+          } else {
+            el.value = '';
+          }
+        });
+
+        // Reset TomSelect customer si está inicializado
+        const customer = document.querySelector('#customer');
+        if (customer && customer.tomselect) {
+          customer.tomselect.clear(true);
+        }
+
+        // Borrar campos dinámicos de pallets
+        const palletFields = document.getElementById('pallet-fields');
+        if (palletFields) {
+          palletFields.innerHTML = '';
+        }
+        const grandTotal = document.getElementById('grand-total');
+        if (grandTotal) {
+          grandTotal.value = '';
+        }
+
+        // Restaurar fecha automática
+        const loaddate = document.getElementById('loaddate');
+        if (loaddate) {
+          const hoy = new Date();
+          const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+          const dd = String(hoy.getDate()).padStart(2, '0');
+          const yyyy = hoy.getFullYear();
+          loaddate.value = `${mm}-${dd}-${yyyy}`;
+        }
+      }
+    });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const prefillBtn = document.getElementById("btn-prefill");
+    if (prefillBtn) prefillBtn.style.display = "none";
+  });
+</script>
+
+</body>
+</html>

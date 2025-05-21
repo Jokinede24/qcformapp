@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Alpine Fresh</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f4f8;
+      font-family: 'Helvetica Neue', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .login-container img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #2b4c3f;
+      font-size: 22px;
+    }
+
+    .login-container input,
+    .login-container select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: #2b4c3f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background: #3d6c57;
+    }
+
+    @media (max-width: 400px) {
+      .login-container {
+        padding: 25px 20px;
+      }
+
+      .login-container h2 {
+        font-size: 20px;
+      }
+
+      .login-container img {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Welcome</h2>
+  <img src="static/fotos/alpine.png" alt="Alpine Fresh Logo">
+
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+  
+  <select id="productSelect" required>
+    <option value="">Select</option>
+    <option value="blueberries">Blueberries</option>
+    <option value="display">Orders Status</option>
+  </select>
+  
+  <button type="button" onclick="redirigirFormulario()">Login</button>
+</div>
+
+<script>
+function redirigirFormulario() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const product = document.getElementById('productSelect').value;
+
+  if (!username || !password || !product) {
+    alert("Por favor completa todos los campos antes de continuar.");
+    return;
+  }
+
+  if (product === "blueberries") {
+    window.location.href = "FORMULARIO.html";
+  } else {
+    alert("Por favor selecciona una opción válida.");
+  }
+}
+</script>
+
+</body>
+</html>

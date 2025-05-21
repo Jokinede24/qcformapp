@@ -1,0 +1,252 @@
+/* Reset y base */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6fc;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contenedor general */
+  .form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Títulos */
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #1e1e2f;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #1e1e2f;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #1e1e2f;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    border-top: 3px solid #444;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1e1e2f;
+  }
+  
+  /* Etiquetas */
+  label {
+    display: block;
+    font-weight: bold;
+    margin: 20px 0 8px;
+    color: #1e1e2f;
+  }
+  
+  label.required::after {
+    content: " *";
+    color: red;
+  }
+  
+  /* Inputs */
+  select,
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  input[type="file"],
+  textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  input::placeholder {
+    color: #aaa;
+  }
+  
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  /* Secciones */
+  .pack-block {
+    border: 1px solid #ddd;
+    background-color: #f9fbff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-group {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+  
+  .checkbox-group label {
+    display: block;
+    margin: 8px 0;
+    font-weight: normal;
+    align-items: center;
+  }
+  
+  /* Botones */
+  .btn-next,
+  .btn-back {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .btn-next {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .btn-back {
+    background-color: #e2e8f0;
+    color: black;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  /* Botón de foto */
+  .photo-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #3a4a60;
+    color: white;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .photo-button img {
+    width: 18px;
+    margin-right: 8px;
+  }
+  
+  /* Otros */
+  .note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .radio-group {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+
+  .photo-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+
+  /* Status visual para PASSED y FAILED */
+.status-field.passed {
+  color: green;
+  font-weight: bold;
+}
+
+.status-field.failed {
+  color: red;
+  font-weight: bold;
+}
+
+
+.foto-blueberries {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.foto-blueberries img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+.custom-photo-button {
+  background-color: #2c3e50;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-photo-button:hover {
+  background-color: #34495e;
+}
+
+
+
+  
